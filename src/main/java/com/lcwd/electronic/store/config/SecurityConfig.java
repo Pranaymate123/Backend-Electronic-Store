@@ -3,6 +3,7 @@ package com.lcwd.electronic.store.config;
 import com.lcwd.electronic.store.security.JwtAuthenticationEntryPoint;
 import com.lcwd.electronic.store.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,6 +23,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -92,6 +96,8 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/auth/login")
                 .permitAll()
+                .antMatchers("/auth/google")
+                .permitAll()
                 .antMatchers(HttpMethod.POST, "/users")
                 .permitAll()
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
@@ -129,5 +135,29 @@ public class SecurityConfig {
         return builder.getAuthenticationManager();
     }
 
+
+    @Bean
+    public FilterRegistrationBean corsFilter(){
+
+        UrlBasedCorsConfigurationSource source= new UrlBasedCorsConfigurationSource();
+        CorsConfiguration configuration=new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+//        configuration.setAllowedOrigins();
+        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedHeader("Authorization");
+        configuration.addAllowedHeader("Content-type");
+        configuration.addAllowedHeader("Accept");
+        configuration.addAllowedMethod("GET");
+        configuration.addAllowedMethod("POST");
+        configuration.addAllowedMethod("DELETE");
+        configuration.addAllowedMethod("PUT");
+        configuration.addAllowedMethod("OPTIONS");
+        configuration.setMaxAge(3600L);
+        source.registerCorsConfiguration("/**",configuration);
+
+        FilterRegistrationBean filterRegistrationBean=new FilterRegistrationBean(new CorsFilter(source));
+        filterRegistrationBean.setOrder(-100);
+        return filterRegistrationBean;
+    }
 
 }
