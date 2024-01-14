@@ -2,11 +2,9 @@ package com.lcwd.electronic.store.dtos;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Getter
 @Setter

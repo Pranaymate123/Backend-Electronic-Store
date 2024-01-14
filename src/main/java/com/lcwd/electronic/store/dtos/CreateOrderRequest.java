@@ -2,10 +2,8 @@ package com.lcwd.electronic.store.dtos;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
+
 
 @Getter
 @Setter
