@@ -59,12 +59,12 @@ public class SwaggerConfig {
 
         ApiInfo apiInfo = new ApiInfo(
                 "Electronic Store Backend : APIS ",
-                "This is backend project created by LCWD",
+                "This is backend project created by Pranay Mate",
                 "1.0.0V",
-                "https://www.learncodewithdurgesh.com",
-                new Contact("Durgesh", "https://www.instagram.com/durgesh_k_t", "learncodewithdurgesh@gmail.com"),
+                "https://www.linkedin.com/in/pranay-mate-895620250/",
+                new Contact("Pranay Mate", "https://www.linkedin.com/in/pranay-mate-895620250/", "pranaymate0706@gmail.com"),
                 "License of APIS",
-                "https://www.learncodewithdurgesh.com/about",
+                "https://www.linkedin.com/in/pranay-mate-895620250/",
                 new ArrayDeque<>()
         );
 

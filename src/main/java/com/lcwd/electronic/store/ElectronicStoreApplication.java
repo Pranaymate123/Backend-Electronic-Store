@@ -51,3 +51,5 @@ public class ElectronicStoreApplication implements CommandLineRunner {
 
     }
 }
+
+

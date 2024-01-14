@@ -15,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @ToString
 public class ProductDto {
     private String productId;

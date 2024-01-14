@@ -103,6 +103,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                 .antMatchers(PUBLIC_URLS)
                 .permitAll()
+                .antMatchers(HttpMethod.GET)
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
