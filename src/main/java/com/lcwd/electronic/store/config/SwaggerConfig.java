@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -28,6 +29,10 @@ import java.util.List;
         scheme = "bearer"
 )
 @OpenAPIDefinition(
+        servers = {
+                @Server(url = "/", description = "Default Server URL")
+        }
+        ,
         info = @Info(
                 title = "Electronic Store API's",
                 description = "This is Electronic Store Project API Developed By Pranay Mate",
