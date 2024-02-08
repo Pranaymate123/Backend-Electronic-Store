@@ -8,9 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class AddItemToCartRequest {
-
     private  String productId;
-
     private  int quantity;
 
 }

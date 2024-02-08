@@ -123,4 +123,18 @@ public class OrderServiceImpl implements OrderService {
         Page<Order> page = orderRepository.findAll(pageable);
         return Helper.getPageableResponse(page, OrderDto.class);
     }
+    @Override
+    public OrderDto updateOrder(CreateOrderRequest orderDto, String orderId) {
+        Order order=orderRepository.findById(orderId).orElseThrow(()-> new ResourceNotFoundException("Order is not Found With Given Id ...."));
+        order.setBillingAddress(orderDto.getBillingAddress());
+        order.setBillingName(orderDto.getBillingName());
+        order.setBillingPhone(orderDto.getBillingPhone());
+        order.setPaymentStatus(orderDto.getPaymentStatus());
+        order.setOrderStatus(orderDto.getOrderStatus());
+        order.setDeliveredDate(orderDto.getDeliveredDate());
+        Order updatedOrder=orderRepository.save(order);
+        return modelMapper.map(updatedOrder,OrderDto.class);
+
+
+    }
 }

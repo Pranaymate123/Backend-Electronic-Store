@@ -20,6 +20,8 @@
     </properties>
     <dependencies>
 
+        <!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client -->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

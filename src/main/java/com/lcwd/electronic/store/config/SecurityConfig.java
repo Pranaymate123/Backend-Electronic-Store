@@ -40,7 +40,8 @@ public class SecurityConfig {
             "/webjars/**",
             "/swagger-resources/**",
             "/v3/api-docs",
-            "/users"
+            "/users",
+            "/auth/google"
 
 
     };

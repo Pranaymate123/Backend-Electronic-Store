@@ -4,6 +4,8 @@ import lombok.*;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Date;
+
 
 @Getter
 @Setter
@@ -28,6 +30,8 @@ public class CreateOrderRequest {
     private String billingPhone;
     @NotBlank(message = "Billing name  is required !!")
     private String billingName;
+
+    private Date deliveredDate;
 
 
 }

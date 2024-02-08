@@ -62,6 +62,16 @@ public class OrderController {
         PageableResponse<OrderDto> orders = orderService.getOrders(pageNumber, pageSize, sortBy, sortDir);
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{orderId}")
+    public ResponseEntity<OrderDto> updateOrder(
+            @RequestBody CreateOrderRequest orderDto,
+            @PathVariable String orderId
+    )
+    {
+        OrderDto updatedOrder=orderService.updateOrder(orderDto,orderId);
+        return new ResponseEntity<>(updatedOrder,HttpStatus.OK);
+    }
 
 
 }

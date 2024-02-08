@@ -39,10 +39,6 @@ public class UserDto {
     @NotBlank(message = "Write something about yourself !!")
     private String about;
 
-//    @Pattern
-//    Custom validator
-
-    @ImageNameValid
     private String imageName;
 
     private Set<RoleDto> roles = new HashSet<>();

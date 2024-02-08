@@ -26,7 +26,7 @@ public class OrderDto {
     private String billingName;
     private Date orderedDate=new Date();
     private Date deliveredDate;
-    //private UserDto user;
+    private UserDto user;
     private List<OrderItemDto> orderItems = new ArrayList<>();
 
 

@@ -1,6 +1,6 @@
 package com.lcwd.electronic.store.services.impl;
 
-import com.lcwd.electronic.store.dtos.ApiResponseMessage;
+
 import com.lcwd.electronic.store.dtos.PageableResponse;
 import com.lcwd.electronic.store.dtos.UserDto;
 import com.lcwd.electronic.store.entities.Role;
@@ -85,7 +85,12 @@ public class UserServiceImpl implements UserService {
         //email update
         user.setAbout(userDto.getAbout());
         user.setGender(userDto.getGender());
-        user.setPassword(userDto.getPassword());
+
+        if(!userDto.getPassword().equalsIgnoreCase(user.getPassword()))
+        {
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        }
+
         user.setImageName(userDto.getImageName());
 
         //save data
@@ -97,8 +102,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with given id !!"));
-
-
         //delete user profile image
         //images/user/abc.png
         String fullPath = imagePath + user.getImageName();

@@ -19,7 +19,6 @@ public class ElectronicStoreApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(ElectronicStoreApplication.class, args);
     }
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -34,15 +33,12 @@ public class ElectronicStoreApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         System.out.println(passwordEncoder.encode("abcd"));
-
         try {
             Role role_admin = Role.builder().roleId(role_admin_id).roleName("ROLE_ADMIN").build();
             Role role_normal = Role.builder().roleId(role_normal_id).roleName("ROLE_NORMAL").build();
             repository.save(role_admin);
             repository.save(role_normal);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

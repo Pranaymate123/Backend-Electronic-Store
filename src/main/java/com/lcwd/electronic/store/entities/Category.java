@@ -26,11 +26,9 @@ public class Category {
     @Column(name = "category_desc", length = 500)
     private String description;
 
+    @Column(length = 1000)
     private String coverImage;
-    // other attributes if you have...
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
-
-
 }

@@ -93,8 +93,8 @@ public class AuthController {
     @PostMapping("/google")
     public  ResponseEntity<JwtResponse> loginWithGoogle(@RequestBody Map<String,Object> data) throws IOException {
         //Get The Id Token From Request......
-        String idToken = data.get("idToken").toString();
-
+        String idToken = data.get("credential").toString();
+        System.out.println("=====================IdToken ==========="+idToken);
         NetHttpTransport netHttpTransport = new NetHttpTransport();
         JacksonFactory jacksonFactory = JacksonFactory.getDefaultInstance();
 
@@ -107,6 +107,8 @@ public class AuthController {
         logger.info("Payload : {}", payload);
 
         String email = payload.getEmail();
+
+//        System.out.println("My Name is  ------->"+name);
 //        String email=data.get("email").toString();
 
         com.lcwd.electronic.store.entities.User user = null;
@@ -114,27 +116,69 @@ public class AuthController {
         user = userService.findUserByEmailOptional(email).orElse(null);
         System.out.println(user);
         JwtRequest jwtRequest=null;
+
         if (user == null)
         {
+            String name=(String)payload.get("name");
+//            String picture=(String)payload.get("picture");
             //create a new user
-            user=this.saveUser(email,data.get("name").toString(),data.get("photoUrl").toString());
+            user=this.saveUser(email,name);
 
         }
-        else {
+
             jwtRequest=new JwtRequest(user.getEmail(),newPassword);
             System.out.println("Request For Login Check "+jwtRequest);
-        }
+
         ResponseEntity<JwtResponse> jwtResponseEntity=this.login(jwtRequest);
         return  jwtResponseEntity;
 //$2a$10$9Tf3KaKxbZQIpDZb0j6sUeIXcAxWPUbwO3BAv491Zo9Dw3CuQUEFC
     }
 
-    private com.lcwd.electronic.store.entities.User saveUser(String email, String name, String photoUrl) {
+
+//    @PostMapping("/google")
+//    public  ResponseEntity<JwtResponse> loginWithGoogle(@RequestBody Map<String,Object> data) throws IOException {
+//        //Get The Id Token From Request......
+//        String idToken = data.get("idToken").toString();
+//
+//        NetHttpTransport netHttpTransport = new NetHttpTransport();
+//        JacksonFactory jacksonFactory = JacksonFactory.getDefaultInstance();
+//
+//        GoogleIdTokenVerifier.Builder verifier = new GoogleIdTokenVerifier.Builder(netHttpTransport, jacksonFactory).setAudience(Collections.singleton(googleClientId));
+//
+//        GoogleIdToken googleIdToken = GoogleIdToken.parse(verifier.getJsonFactory(), idToken);
+//
+//        GoogleIdToken.Payload payload = googleIdToken.getPayload();
+//
+//        logger.info("Payload : {}", payload);
+//
+//        String email = payload.getEmail();
+////        String email=data.get("email").toString();
+//
+//        com.lcwd.electronic.store.entities.User user = null;
+//        //check
+//        user = userService.findUserByEmailOptional(email).orElse(null);
+//        System.out.println(user);
+//        JwtRequest jwtRequest=null;
+//        if (user == null)
+//        {
+//            //create a new user
+//            user=this.saveUser(email,data.get("name").toString(),data.get("photoUrl").toString());
+//
+//        }
+//        else {
+//            jwtRequest=new JwtRequest(user.getEmail(),newPassword);
+//            System.out.println("Request For Login Check "+jwtRequest);
+//        }
+//        ResponseEntity<JwtResponse> jwtResponseEntity=this.login(jwtRequest);
+//        return  jwtResponseEntity;
+////$2a$10$9Tf3KaKxbZQIpDZb0j6sUeIXcAxWPUbwO3BAv491Zo9Dw3CuQUEFC
+//    }
+
+    private com.lcwd.electronic.store.entities.User saveUser(String email, String name) {
         UserDto newUser= UserDto.builder()
                 .email(email)
                 .name(name)
                 .password(newPassword)
-                .imageName(photoUrl)
                 .roles(new HashSet<>())
                 .build();
 
