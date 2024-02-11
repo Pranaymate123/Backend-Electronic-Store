@@ -86,14 +86,23 @@ public class UserServiceImpl implements UserService {
         user.setAbout(userDto.getAbout());
         user.setGender(userDto.getGender());
 
-        if(!userDto.getPassword().equalsIgnoreCase(user.getPassword()))
-        {
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        }
+//        if(!userDto.getPassword().equalsIgnoreCase(user.getPassword()))
+//        {
+//            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+//        }
 
         user.setImageName(userDto.getImageName());
 
         //save data
+        User updatedUser = userRepository.save(user);
+        UserDto updatedDto = entityToDto(updatedUser);
+        return updatedDto;
+    }
+
+    @Override
+    public UserDto updateUserPassword(UserDto userDto, String email) {
+        User user=userRepository.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("User Not Found with given mail id !"));
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User updatedUser = userRepository.save(user);
         UserDto updatedDto = entityToDto(updatedUser);
         return updatedDto;

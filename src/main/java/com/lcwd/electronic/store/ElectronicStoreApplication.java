@@ -2,6 +2,7 @@ package com.lcwd.electronic.store;
 
 import com.lcwd.electronic.store.entities.Role;
 import com.lcwd.electronic.store.repositories.RoleRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -22,8 +23,11 @@ public class ElectronicStoreApplication implements CommandLineRunner {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @Autowired
     private RoleRepository repository;
+
+
 
     @Value("${normal.role.id}")
     private String role_normal_id;

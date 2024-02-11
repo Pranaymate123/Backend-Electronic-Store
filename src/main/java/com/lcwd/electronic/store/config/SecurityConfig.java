@@ -41,7 +41,10 @@ public class SecurityConfig {
             "/swagger-resources/**",
             "/v3/api-docs",
             "/users",
-            "/auth/google"
+            "/auth/google",
+            "/forgot-password/**",
+            "/users/change-password/**",
+            "/register/**"
 
 
     };
@@ -94,7 +97,9 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(HttpMethod.POST,"/users")
                         .permitAll()
-                        .requestMatchers(HttpMethod.DELETE,"/USERS/**")
+                        .requestMatchers(HttpMethod.PUT,"/users/{email}")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.DELETE,"/users/**")
                         .hasRole("ADMIN")
                         .requestMatchers(PUBLIC_URLS)
                         .permitAll()

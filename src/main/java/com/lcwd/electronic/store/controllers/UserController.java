@@ -71,6 +71,15 @@ public class UserController {
     }
 
 
+    @PutMapping("/change-password/{email}")
+    public ResponseEntity<UserDto> updateUserPassword(
+            @PathVariable("email") String email,
+            @RequestBody UserDto userDto
+    ) {
+        UserDto updatedUserDto = userService.updateUserPassword(userDto, email);
+        return new ResponseEntity<>(updatedUserDto, HttpStatus.OK);
+    }
+
     //delete
     @DeleteMapping("/{userId}")
     public ResponseEntity<ApiResponseMessage> deleteUser(@PathVariable String userId) {
