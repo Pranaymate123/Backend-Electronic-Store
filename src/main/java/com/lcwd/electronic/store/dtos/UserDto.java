@@ -38,7 +38,6 @@ public class UserDto {
 
     @NotBlank(message = "Write something about yourself !!")
     private String about;
-
     private String imageName;
 
     private Set<RoleDto> roles = new HashSet<>();
